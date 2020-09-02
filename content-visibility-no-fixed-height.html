@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>content-visibility</title>
+    <style>
+      .container {
+        color: white;
+        content-visibility: auto;
+        width: 100%;
+      }
+      .red {
+        background-color: red;
+      }
+      .blue {
+        background-color: blue;
+      }
+      .yellow {
+        background-color: yellow;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="template" class="container yellow">
+      <img
+        src="https://via.placeholder.com/300/09f/fff.png"
+        width="300"
+        height="300"
+      />
+      <p>red</p>
+    </div>
+    <script>
+      const colorClassList = ["red", "blue", "yellow"];
+
+      [...new Array(10000)].forEach((_, i) => {
+        const el = document.createElement("div");
+        const color = colorClassList[i % 3];
+        el.className = `container ${color}`;
+
+        const imgEl = document.createElement("img");
+        imgEl.src = "https://via.placeholder.com/300/09f/fff.png";
+        el.appendChild(imgEl);
+
+        const pEl = document.createElement("p");
+        pEl.innerText = color;
+        el.appendChild(pEl);
+
+        document.body.appendChild(el);
+      });
+    </script>
+  </body>
+</html>
